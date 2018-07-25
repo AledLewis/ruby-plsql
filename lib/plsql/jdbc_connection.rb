@@ -571,7 +571,7 @@ module PLSQL
     end
 
     def java_bigdecimal(value)
-      value && java.math.BigDecimal(value.to_s)
+      value && java.math.BigDecimal.new(value.to_s)
     end
 
     def ora_number_to_ruby_number(num)
