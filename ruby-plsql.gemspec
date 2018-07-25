@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Raimonds Simanovskis".freeze]
-  s.date = "2016-05-06"
+  s.date = "2018-07-25"
   s.description = "  ruby-plsql gem provides simple Ruby API for calling Oracle PL/SQL procedures.\n  It could be used both for accessing Oracle PL/SQL API procedures in legacy applications\n  as well as it could be used to create PL/SQL unit tests using Ruby testing libraries.\n".freeze
   s.email = "raimonds.simanovskis@gmail.com".freeze
   s.extra_rdoc_files = [
@@ -19,9 +19,6 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".travis.yml",
-    ".travis/oracle/LICENSE",
-    ".travis/oracle/README.md",
-    ".travis/oracle/download.js",
     ".travis/oracle/download.sh",
     ".travis/oracle/install.sh",
     ".travis/setup_accounts.sh",
@@ -32,6 +29,10 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "Vagrantfile",
+    "gemfiles/Gemfile.activerecord-4.1",
+    "gemfiles/Gemfile.activerecord-4.2",
+    "gemfiles/Gemfile.activerecord-5.0",
+    "gemfiles/Gemfile.activerecord-5.1",
     "lib/plsql/connection.rb",
     "lib/plsql/helpers.rb",
     "lib/plsql/jdbc_connection.rb",
@@ -51,6 +52,7 @@ Gem::Specification.new do |s|
     "lib/ruby-plsql.rb",
     "lib/ruby_plsql.rb",
     "ruby-plsql.gemspec",
+    "spec/plsql/blob_spec.rb",
     "spec/plsql/connection_spec.rb",
     "spec/plsql/package_spec.rb",
     "spec/plsql/procedure_spec.rb",
@@ -71,8 +73,7 @@ Gem::Specification.new do |s|
     "spec/support/unlock_and_setup_hr_user.sql"
   ]
   s.homepage = "http://github.com/rsim/ruby-plsql".freeze
-  s.license = "MIT".freeze
-  s.rubygems_version = "2.6.4".freeze
+  s.rubygems_version = "2.6.14.1".freeze
   s.summary = "Ruby API for calling Oracle PL/SQL procedures.".freeze
 
   if s.respond_to? :specification_version then
@@ -83,29 +84,29 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec_junit_formatter>.freeze, [">= 0"])
       s.add_development_dependency(%q<rake>.freeze, [">= 10.0"])
       s.add_development_dependency(%q<rspec>.freeze, ["~> 3.1"])
-      s.add_development_dependency(%q<activerecord>.freeze, ["< 4.3.0", ">= 3.2.3"])
-      s.add_development_dependency(%q<activerecord-oracle_enhanced-adapter>.freeze, ["< 1.7.0", ">= 1.4.1"])
+      s.add_development_dependency(%q<dotenv>.freeze, [">= 0"])
+      s.add_development_dependency(%q<activerecord>.freeze, ["< 5.2.0", ">= 3.2.3"])
+      s.add_development_dependency(%q<activerecord-oracle_enhanced-adapter>.freeze, ["< 1.9.0", ">= 1.4.1"])
       s.add_development_dependency(%q<simplecov>.freeze, [">= 0"])
-      s.add_development_dependency(%q<ruby-oci8>.freeze, ["~> 2.1"])
     else
       s.add_dependency(%q<juwelier>.freeze, ["~> 2.0"])
       s.add_dependency(%q<rspec_junit_formatter>.freeze, [">= 0"])
       s.add_dependency(%q<rake>.freeze, [">= 10.0"])
       s.add_dependency(%q<rspec>.freeze, ["~> 3.1"])
-      s.add_dependency(%q<activerecord>.freeze, ["< 4.3.0", ">= 3.2.3"])
-      s.add_dependency(%q<activerecord-oracle_enhanced-adapter>.freeze, ["< 1.7.0", ">= 1.4.1"])
+      s.add_dependency(%q<dotenv>.freeze, [">= 0"])
+      s.add_dependency(%q<activerecord>.freeze, ["< 5.2.0", ">= 3.2.3"])
+      s.add_dependency(%q<activerecord-oracle_enhanced-adapter>.freeze, ["< 1.9.0", ">= 1.4.1"])
       s.add_dependency(%q<simplecov>.freeze, [">= 0"])
-      s.add_dependency(%q<ruby-oci8>.freeze, ["~> 2.1"])
     end
   else
     s.add_dependency(%q<juwelier>.freeze, ["~> 2.0"])
     s.add_dependency(%q<rspec_junit_formatter>.freeze, [">= 0"])
     s.add_dependency(%q<rake>.freeze, [">= 10.0"])
     s.add_dependency(%q<rspec>.freeze, ["~> 3.1"])
-    s.add_dependency(%q<activerecord>.freeze, ["< 4.3.0", ">= 3.2.3"])
-    s.add_dependency(%q<activerecord-oracle_enhanced-adapter>.freeze, ["< 1.7.0", ">= 1.4.1"])
+    s.add_dependency(%q<dotenv>.freeze, [">= 0"])
+    s.add_dependency(%q<activerecord>.freeze, ["< 5.2.0", ">= 3.2.3"])
+    s.add_dependency(%q<activerecord-oracle_enhanced-adapter>.freeze, ["< 1.9.0", ">= 1.4.1"])
     s.add_dependency(%q<simplecov>.freeze, [">= 0"])
-    s.add_dependency(%q<ruby-oci8>.freeze, ["~> 2.1"])
   end
 end
 
