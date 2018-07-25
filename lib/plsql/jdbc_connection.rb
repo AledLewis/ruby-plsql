@@ -267,7 +267,7 @@ module PLSQL
       java.sql.Types::TIMESTAMP => Time,
       Java::oracle.jdbc.OracleTypes::TIMESTAMPTZ => Time,
       Java::oracle.jdbc.OracleTypes::TIMESTAMPLTZ => Time,
-      Java::oracle.jdbc.OracleTypes::BLOB => Java::OracleSql::BLOB,      
+      Java::oracle.jdbc.OracleTypes::BLOB => Java::OracleSql::BLOB,
       java.sql.Types::CLOB => String,
       java.sql.Types::ARRAY => Java::OracleSql::ARRAY,
       java.sql.Types::STRUCT => Java::OracleSql::STRUCT,
@@ -279,7 +279,7 @@ module PLSQL
     end
 
     def set_bind_variable(stmt, i, value, type=nil, length=nil, metadata={})
-      
+
       key = i.kind_of?(Integer) ? nil : i.to_s.gsub(':','')
       type_symbol = (!value.nil? && type ? type : value.class).to_s.to_sym
       case type_symbol
@@ -316,7 +316,7 @@ module PLSQL
       when :'Java::OracleSql::ARRAY'
         stmt.send("setARRAY#{key && "AtName"}", key || i, value)
       when :'Java::OracleSql::STRUCT'
-        stmt.send("setSTRUCT#{key && "AtName"}", key || i, value) 
+        stmt.send("setSTRUCT#{key && "AtName"}", key || i, value)
       when :'Java::JavaSql::ResultSet'
         # TODO: cannot find how to pass cursor parameter from JDBC
         # setCursor is giving exception java.sql.SQLException: Unsupported feature
@@ -334,7 +334,7 @@ module PLSQL
         stmt.getFloat(i)
       when :BigDecimal
         bd = stmt.getBigDecimal(i)
-        bd && BigDecimal.new(bd.to_s)
+        bd && BigDecimal(bd.to_s)
       when :String
         stmt.getString(i)
       when :'Java::OracleSql::CLOB'
@@ -487,7 +487,7 @@ module PLSQL
             else
               object_attrs.put(key.to_s.upcase, ruby_value_to_ora_value(attr_value))
             end
-          end 
+          end
           Java::OracleSql::STRUCT.new(descriptor, raw_connection, object_attrs)
         end
       when :'Java::JavaSql::ResultSet'
@@ -504,7 +504,7 @@ module PLSQL
       when Float, BigDecimal
         ora_number_to_ruby_number(value)
       when Java::JavaMath::BigDecimal
-        value && ora_number_to_ruby_number(BigDecimal.new(value.to_s))
+        value && ora_number_to_ruby_number(BigDecimal(value.to_s))
       when Java::OracleSql::DATE
         if value
           d = value.dateValue
@@ -573,12 +573,12 @@ module PLSQL
     end
 
     def java_bigdecimal(value)
-      value && java.math.BigDecimal.new(value.to_s)
+      value && java.math.BigDecimal(value.to_s)
     end
 
     def ora_number_to_ruby_number(num)
       # return BigDecimal instead of Float to avoid rounding errors
-      num == (num_to_i = num.to_i) ? num_to_i : (num.is_a?(BigDecimal) ? num : BigDecimal.new(num.to_s))
+      num == (num_to_i = num.to_i) ? num_to_i : (num.is_a?(BigDecimal) ? num : BigDecimal(num.to_s))
     end
 
   end
