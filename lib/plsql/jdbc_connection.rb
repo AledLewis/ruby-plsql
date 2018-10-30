@@ -334,7 +334,7 @@ module PLSQL
         stmt.getFloat(i)
       when :BigDecimal
         bd = stmt.getBigDecimal(i)
-        bd && BigDecimal.new(bd.to_s)
+        bd && BigDecimal(bd.to_s)
       when :String
         stmt.getString(i)
       when :'Java::OracleSql::CLOB'
