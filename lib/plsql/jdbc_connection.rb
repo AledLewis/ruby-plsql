@@ -237,8 +237,6 @@ module PLSQL
 
     RUBY_CLASS_TO_SQL_TYPE = {
       Integer => java.sql.Types::INTEGER,
-      Integer => java.sql.Types::INTEGER,
-      Integer => java.sql.Types::INTEGER,
       Float => java.sql.Types::FLOAT,
       BigDecimal => java.sql.Types::NUMERIC,
       String => java.sql.Types::VARCHAR,
