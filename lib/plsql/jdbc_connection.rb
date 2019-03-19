@@ -236,8 +236,6 @@ module PLSQL
     end
 
     RUBY_CLASS_TO_SQL_TYPE = {
-      Fixnum => java.sql.Types::INTEGER,
-      Bignum => java.sql.Types::INTEGER,
       Integer => java.sql.Types::INTEGER,
       Float => java.sql.Types::FLOAT,
       BigDecimal => java.sql.Types::NUMERIC,
@@ -334,7 +332,7 @@ module PLSQL
         stmt.getFloat(i)
       when :BigDecimal
         bd = stmt.getBigDecimal(i)
-        bd && BigDecimal.new(bd.to_s)
+        bd && BigDecimal(bd.to_s)
       when :String
         stmt.getString(i)
       when :'Java::OracleSql::CLOB'
